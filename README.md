@@ -92,8 +92,36 @@ ssh bridges
 
 After you have login in into bridges, there are a couple of further steps in order to configurate the enviroment: 
 
+### Get and install conda: 
+
+```
+wget http://repo.continuum.io/archive/Anaconda3-4.3.0-Linux-x86_64.sh
+bash Anaconda3-4.3.0-Linux-x86_64.sh
+```
+
+### Install Jupyter and Jupyterlab
+
+To install jupyter and jupyterlab, type the following commands: 
+
+```
+conda install jupyter
+conda install -c conda-forge jupyterlab
+```
 
 
 ## Running the notebook
 
-xxx
+### Connect using this command. 
+
+In order to be able to run a jupyter notebook. We need to log in with the following comand to bridges: 
+
+```
+ssh -L 8888:127.0.0.1:8888 bridges
+```
+Once in bridges we use the following command to start the notebook. 
+
+```
+jupyter notebook --no-browser --port 8888
+```
+Then we can start our browser on the address localhost:8888/lab? . 
+
