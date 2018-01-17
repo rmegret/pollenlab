@@ -13,13 +13,19 @@ Click on "Create Account" button and fill in the form using your UPR email.
 
 After validating this account, send your _XSEDE_login_ to your professor to get access to Bridges.
 
-### Step 2. Create an account on PSC (optional)
+### Step 2. Download and set up manage duo app. 
+
+Lately, Xsede has improved security by incorporing two-factor authentication. Follow the instructions here to set up : 
+
+https://portal.xsede.org/mfa
+
+### Step 3. Create an account on PSC (optional)
 
 Create a new account in the "PSC Password Change Utility": https://apr.psc.edu/autopwdreset/autopwdreset.html
 
 User guide: https://portal.xsede.org/psc-bridges#access:initpw
 
-### Step 3. Access to Bridges
+### Step 4. Access to Bridges
 
 Using your _XSEDE account name_, your professor can grant you access to Bridges. 
 You should receive an email once it has been approved. You cannot connect until your account has
@@ -58,11 +64,34 @@ Are you sure you want to continue connecting (yes/no)? yes
 ```
 Make sure your are on a reliable network (UPR), check the fingerprint is correct, and type `yes` to proceed. This warning is designed to prevent Man-In-The-Middle attacks.
 
+### Advanced configuration (optional): 
 
+Add bridges to your ssh config file, in order to make it easier to connect in the future. 
+Type the following command on terminal. If you do not have nano, try using vim. 
+
+```
+nano ~/.ssh/config
+```
+
+Paste this information, make sure to put your username: 
+
+```
+Host bridges
+Hostname bridges.psc.edu
+User <username>
+Port 2222
+```
+
+Now you can access easily bridges using the command: 
+
+```
+ssh bridges 
+```
 
 ## Setting up the lab
 
-xxx
+After you have login in into bridges, there are a couple of further steps in order to configurate the enviroment: 
+
 
 
 ## Running the notebook
