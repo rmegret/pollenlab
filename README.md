@@ -90,22 +90,45 @@ ssh bridges
 
 ## Setting up the lab
 
-After you have login in into bridges, there are a couple of further steps in order to configurate the enviroment: 
+After you have login in into bridges, there are a couple of further steps in order to configurate the enviroment:
+
+### Login into bridges
+
+
+ We need to login with the following command to be able to run interactive jupyter lab. 
+
+```
+ssh -L 8888:127.0.0.1:8888 bridges
+``` 
 
 ### Get and install conda: 
 
 ```
 wget http://repo.continuum.io/archive/Anaconda3-4.3.0-Linux-x86_64.sh
 bash Anaconda3-4.3.0-Linux-x86_64.sh
-```
-
-### Install Jupyter and Jupyterlab
-
-To install jupyter and jupyterlab, type the following commands: 
 
 ```
-conda install jupyter
-conda install -c conda-forge jupyterlab
+
+
+### Clone these repositories
+
+Now we will clone this repo and the one with the dataset. 
+
+```
+git clone https://github.com/rmegret/pollenlab.git
+
+git clone https://github.com/piperod/pollendataset.git
+
+```
+
+
+### Create and enviroment for the workshop. 
+
+Enter the repository pollenlab and create a new enviroment using the requirements in the text file. 
+
+```
+conda create --name workshop --file requeriments.txt
+
 ```
 
 
