@@ -103,7 +103,10 @@ ssh -L 8888:127.0.0.1:8888 bridges
 
 ### Get and install conda: 
 
+Go to your /pylon5/ directory and type the following commands. This way we avoid geting out of space downloading the necessary tools. 
+
 ```
+cd /pylon5/ci5616p/<username>
 wget http://repo.continuum.io/archive/Anaconda3-4.3.0-Linux-x86_64.sh
 bash Anaconda3-4.3.0-Linux-x86_64.sh
 
@@ -112,7 +115,7 @@ bash Anaconda3-4.3.0-Linux-x86_64.sh
 
 ### Clone these repositories
 
-Now we will clone this repo and the one with the dataset. 
+Now we need to clone this repo and the one with the dataset. 
 
 ```
 git clone https://github.com/rmegret/pollenlab.git
@@ -146,5 +149,15 @@ Once in bridges we use the following command to start the notebook.
 ```
 jupyter notebook --no-browser --port 8888
 ```
-Then we can start our browser on the address localhost:8888/lab? . 
+Then we can start our browser on the address localhost:8888/lab? 
 
+## Configuring Keras 
+
+By default keras creates a configuration file in your home directory. To checkout the location open a notebook and type: 
+
+```python 
+
+import os 
+os.expanduser(~)
+
+```
