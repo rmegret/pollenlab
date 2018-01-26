@@ -162,3 +162,13 @@ print(os.path.expanduser('~'))
 
 ```
 Here you can see what backend is using keras or the configurations for channels. 
+
+# General structure for the workshop :
+
+You are going to find the following notebooks and example scripts in this workshop: 
+
+1. Workshop Notes : A detailed break down in topics of the scripts used. And a comprehensive tutorial for starting with keras. 
+
+2. Pollenlab: This notebook calls the scripts and run them for debugin purposes and ilustration of the content covered on the workshop notes. 
+
+3. Motivation: This notebook contains a quick presentation of the paper submitted to WACV. 
