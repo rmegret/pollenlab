@@ -157,7 +157,8 @@ By default keras creates a configuration file in your home directory. To checkou
 
 ```python 
 
-import os 
-os.expanduser(~)
+import os
+print(os.path.expanduser('~'))
 
 ```
+Here you can see what backend is using keras or the configurations for channels. 
