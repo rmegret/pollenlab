@@ -111,6 +111,11 @@ wget http://repo.continuum.io/archive/Anaconda3-4.3.0-Linux-x86_64.sh
 bash Anaconda3-4.3.0-Linux-x86_64.sh
 
 ```
+When you get the question about where to install, please type: 
+
+```bash 
+/pylon5/ci5616p/<username>/anaconda3
+```
 
 
 ### Clone these repositories
