@@ -62,20 +62,22 @@ def ccd_layer_cat( input_shape=(32, 32, 3), lr=0.0025):
 
 	return model 
 
-def shallow_model(input_shape=(3,100,100), lr =0.001, kernels=16, stride=(5,5),pool_size=(2,2), dense=50):
-	model = Sequential()
-
-	model.add(Conv2D(kernels, stride, input_shape=input_shape))
-	model.add(Activation('relu'))
-	model.add(MaxPooling2D(pool_size=pool_size))
-
-	model.add(Flatten())
-	model.add(Dense(dense, activation='relu'))
-	model.add(Dense(2, activation='softmax'))
-	model.compile(loss='binary_crossentropy',
+def shallow_model(input_shape=(3,90,150), lr =0.0005, kernels=16, stride=(13,13),pool_size=(2,2),strides=(1,1), dense=50):
+    model = Sequential()
+    
+    
+    model.add(Conv2D(kernels, stride, input_shape=input_shape))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=pool_size,strides=strides))
+    
+    
+    model.add(Flatten())
+    model.add(Dense(dense, activation='relu'))
+    model.add(Dense(2, activation='softmax'))
+    model.compile(loss='binary_crossentropy',
               optimizer=SGD(lr=lr),
               metrics=['accuracy'])
-	return model
+    return model
 
 def two_layer_model(input_shape=(3,300,180), lr =0.001, kernels=16, stride=(13,13),pool_size=(2,2), dense=50):
     model = Sequential()
