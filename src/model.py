@@ -79,16 +79,20 @@ def shallow_model(input_shape=(3,90,150), lr =0.0005, kernels=16, stride=(13,13)
               metrics=['accuracy'])
     return model
 
-def two_layer_model(input_shape=(3,300,180), lr =0.001, kernels=16, stride=(13,13),pool_size=(2,2), dense=50):
+def two_layer_model(input_shape=(3,300,90), lr =0.001, kernels=16, stride=(13,13),pool_size=(2,2), dense=50,strides=(1,1)):
     model = Sequential()
     model.add(Conv2D(kernels, stride, input_shape=input_shape))
     model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=pool_size))
+    model.add(MaxPooling2D(pool_size=pool_size,strides=stride))
+    
     model.add(Conv2D(kernels, stride, input_shape=input_shape))
     model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=pool_size))
+    model.add(MaxPooling2D(pool_size=pool_size,strides=strides))
+    
     model.add(Flatten())
     model.add(Dense(dense, activation='relu'))
     model.add(Dense(2, activation='softmax'))
-    model.compile(loss='binary_crossentropy',optimizer=SGD(lr=lr),metrics=['accuracy'])
+    model.compile(loss='binary_crossentropy',
+              optimizer=SGD(lr=lr),
+              metrics=['accuracy'])
     return model
