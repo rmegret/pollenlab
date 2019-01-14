@@ -41,7 +41,7 @@ class Experiment(object):
 			Nexp= len(os.listdir(self.path)) #How many directories are there in results
 			os.makedirs(self.path+"/Experiment"+str(Nexp))
 			self.path_to_save = self.path+"/Experiment"+str(Nexp)
-			checkpoint = ModelCheckpoint(os.path.join(self.path_to_save,'weights.best.h5'), monitor='accuracy', verbose=1, save_best_only=True, mode='max')
+			checkpoint = ModelCheckpoint(os.path.join(self.path_to_save,'weights.best.h5'), monitor='val_acc', verbose=1, save_best_only=True, mode='max')
 			history = model.fit(self.train,self.train_y,batch_size = self.batch_size,epochs=self.epochs, callbacks=[checkpoint],validation_data=(self.test,self.test_y))
 			results = model.evaluate(self.test,self.test_y)
 			H = pd.DataFrame(history.history, index=history.epoch)
