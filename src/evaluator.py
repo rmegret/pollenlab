@@ -5,6 +5,7 @@ from keras.optimizers import SGD, Adam
 from keras.utils.np_utils import to_categorical
 from keras.layers.convolutional import Convolution2D, MaxPooling2D, Convolution3D
 from keras.layers.convolutional import Conv2D
+from keras.callbacks import ModelCheckpoint
 from sklearn.preprocessing import scale
 from keras import regularizers
 from vis.visualization import visualize_saliency, overlay,visualize_cam
@@ -32,21 +33,28 @@ class Experiment(object):
 
 	def launch_experiment(self,model,vis=False):
 
-		try: 
+		try:
 			print("...Launching Experiment....")
-			history = model.fit(self.train,self.train_y,batch_size = self.batch_size,epochs=self.epochs,validation_data=(self.test,self.test_y))
+			self.model = model #saving the model in the object
+			os.makedirs(self.path,exist_ok=True)
+
+			Nexp= len(os.listdir(self.path)) #How many directories are there in results
+			os.makedirs(self.path+"/Experiment"+str(Nexp))
+			self.path_to_save = self.path+"/Experiment"+str(Nexp)
+			checkpoint = ModelCheckpoint(os.path.join(self.path_to_save,'weights.best.h5'), monitor='accuracy', verbose=1, save_best_only=True, mode='max')
+			history = model.fit(self.train,self.train_y,batch_size = self.batch_size,epochs=self.epochs, callbacks=[checkpoint],validation_data=(self.test,self.test_y))
 			results = model.evaluate(self.test,self.test_y)
 			H = pd.DataFrame(history.history, index=history.epoch)
 		except:
-			print("Check inputs and outputs dimensions")
+			print("Error!,Check inputs and outputs dimensions")
+			try:
+				print('trying to clean up')
+				os.rmdir(self.path_to_save)
+			except:
+				print('cleaning not possible')
 			return
 
-		self.model = model #saving the model in the object
-		os.makedirs(self.path,exist_ok=True)
-
-		Nexp= len(os.listdir(self.path)) #How many directories are there in results
-		os.makedirs(self.path+"/Experiment"+str(Nexp))
-		self.path_to_save = self.path+"/Experiment"+str(Nexp)
+		
 		print(".........The experiment was successfull.........")
 		print("....Saving model to disk....")
 		model_json = model.to_json() #save the model
